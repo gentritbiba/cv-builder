@@ -1,0 +1,727 @@
+:root {
+  --accent: #000;
+  --accent-blue: #2563eb;
+  --text: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --bg: #ffffff;
+  --border: #e5e7eb;
+  --surface: #f9fafb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f3f4f6;
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App Layout */
+.app {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  min-height: 100vh;
+}
+
+/* Editor Panel */
+.editor {
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 200px;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 1000;
+  animation: toast-in 0.2s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.editor-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.editor-header h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn.primary {
+  background: var(--accent);
+  color: white;
+}
+
+.action-btn.primary:hover {
+  background: #333;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  z-index: 9;
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.toolbar-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.toolbar-btn.active {
+  background: var(--accent-blue);
+  color: white;
+}
+
+.toolbar-btn.active:hover {
+  background: #1d4ed8;
+}
+
+.toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.toolbar-btn .chevron {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.toolbar-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dropdown-menu button:hover {
+  background: var(--surface);
+}
+
+.import-panel {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.import-panel textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  resize: vertical;
+  margin-bottom: 12px;
+}
+
+.import-panel textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+.import-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.editor-content {
+  padding: 24px;
+}
+
+.editor-section {
+  margin-bottom: 32px;
+}
+
+.editor-section h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  margin-bottom: 0;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Job Editor */
+.job-editor {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.job-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.job-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.position-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.position-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.position-row input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+.position-row .date-input {
+  flex: 0.6;
+}
+
+.achievement-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.achievement-row textarea {
+  flex: 1;
+}
+
+/* Skills Editor */
+.skills-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-row {
+  display: flex;
+  gap: 8px;
+}
+
+.skill-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.skill-row input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+/* Cert Editor */
+.cert-editor {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.cert-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cert-fields input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+/* Buttons */
+.add-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: var(--border);
+}
+
+.add-btn.small {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.remove-btn {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.remove-btn:hover {
+  background: #fecaca;
+}
+
+.remove-btn.small {
+  padding: 6px 10px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Preview Container */
+.preview-container {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* CV Page Styles - ATS Friendly Single Column */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 44px 48px;
+  background: var(--bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+/* Header */
+.page header {
+  margin-bottom: 36px;
+}
+
+.name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+/* Contact - ATS friendly with labels */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.95rem;
+  font-style: normal;
+}
+
+.contact > span {
+  display: inline;
+}
+
+.contact-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contact a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+/* Main content - single column */
+.page main {
+  display: block;
+}
+
+/* Sections */
+.page section {
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--text);
+}
+
+/* Experience */
+.job {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.job:last-child {
+  margin-bottom: 0;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.page .company {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page .job > .company {
+  margin-bottom: 6px;
+}
+
+.positions {
+  margin-bottom: 10px;
+}
+
+.position {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.role {
+  font-size: 0.95rem;
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.job-header + .role {
+  margin-bottom: 10px;
+}
+
+.achievements {
+  list-style: disc;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.achievements li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Highlight numbers */
+.highlight {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Skills - simple text for ATS */
+.skills-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Education - simple text */
+.education-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Certifications - simple list */
+.page .cert-list {
+  list-style: disc;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.page .cert-list li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Print styles - ATS optimized */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    background: white;
+  }
+
+  .app {
+    display: block;
+  }
+
+  .editor {
+    display: none !important;
+  }
+
+  .preview-container {
+    padding: 0;
+  }
+
+  .page {
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 36px 44px;
+  }
+
+  /* Use system font for maximum compatibility */
+  * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Ensure text is selectable - keep weights moderate */
+  .name {
+    font-weight: 700 !important;
+    font-size: 2.5rem;
+    color: var(--text) !important;
+  }
+
+  .company {
+    font-weight: 600 !important;
+    color: var(--text);
+  }
+
+  .section-title {
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 4px;
+  }
+
+  .highlight {
+    font-weight: 600 !important;
+    color: var(--text);
+  }
+
+  .contact-label {
+    font-weight: 600 !important;
+  }
+
+  /* Simple block layout for job headers */
+  .job-header {
+    display: block;
+    overflow: hidden;
+  }
+
+  .job-header .company {
+    float: left;
+  }
+
+  .job-header .date {
+    float: right;
+    color: var(--text-secondary);
+  }
+
+  .contact {
+    display: block;
+  }
+
+  .contact > span {
+    display: inline;
+    margin-right: 24px;
+  }
+
+  /* Standard bullet points */
+  .achievements {
+    list-style: disc;
+    padding-left: 20px;
+  }
+
+  .achievements li {
+    padding-left: 0;
+  }
+
+  .cert-list {
+    list-style: disc;
+    padding-left: 20px;
+  }
+}
