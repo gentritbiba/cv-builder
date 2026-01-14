@@ -32,7 +32,7 @@ export const defaultCVData: CVData = {
   name: "John Doe",
   email: "john.doe@email.com",
   phone: "+1 555 123 4567",
-  website: "johndoe.dev",
+  website: "example.com",
   jobs: [
     {
       id: "1",
