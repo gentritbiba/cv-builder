@@ -2,6 +2,8 @@
 
 An ATS-friendly CV/Resume builder with live preview and PDF export.
 
+**[Live Demo](https://gentritbiba.github.io/cv-builder/)**
+
 ## Features
 
 - **ATS-Optimized**: Single-column layout with semantic HTML and labeled contact fields for maximum compatibility with Applicant Tracking Systems
